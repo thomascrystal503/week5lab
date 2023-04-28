@@ -264,7 +264,7 @@ Question 7: Put it all together \n`)
 class Movie {
   constructor(title, director) {
     this.title = title
-    this.director = director
+    this.director = director;
   }
 
   describe() {
@@ -273,13 +273,20 @@ class Movie {
 }
 
 class List {
-  constructor(movies = []) {
-    this.movies = movies;
+  constructor(title) {
+    this.title = title;
+    this.movies = [];    
   }
 
   addMovie(movie) {
-    this.movie = movie;
-    movies.push(this.movies);
+    if (movie instanceof Movie) {
+      this.movies.push(new Movie(movie));
+    } else {
+      throw new Error (`You can only add an instance of movie. Argument is not a movie: ${movie}.`);
+    }
+    // describe() {
+    //  console.log(`${this.title} has ${this.movies.length} movie(s).`);
+    // }       
   }
     
   displayMovies () {
@@ -297,8 +304,9 @@ let movie2 = new Movie('How the Grinch Stole Christmas', 'Ron Howard');
 console.log(movie1.describe());
 console.log(movie2.describe());
 
+// 
 let list = new List(addMovie(movie1));
 console.log(list);
-//console.log(displayMovies(movies));
+console.log(displayMovies(movies));
 
 console.log(`-----------Finished------------`)
